@@ -1,0 +1,24 @@
+剑指Offer 54.二叉搜索树的第k个大节点
+二叉搜索树在中序遍历（左，中，右）是顺序输出，要逆序输出，则（右，中，左）
+class Solution {
+public:
+    int ans = 0;
+    int i = 0;
+    void bfs(TreeNode* root) {
+        if(root == NULL || i == 0) {
+            return;
+        }
+        bfs(root->right);
+        i--;
+        if(i == 0) {
+            ans = root->val;
+            return;
+        }
+        bfs(root->left);
+    }
+    int kthLargest(TreeNode* root, int k) {
+        i = k;
+        bfs(root);
+        return ans;
+    }
+};
